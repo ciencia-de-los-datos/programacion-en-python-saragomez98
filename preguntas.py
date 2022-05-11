@@ -21,8 +21,16 @@ def pregunta_01():
     214
 
     """
-    return
-
+    import csv
+    from operator import itemgetter
+    with open("data.csv",newline='') as file:
+        data=csv.reader(file, delimiter='\t')
+        columns= list(data)
+    suma=0
+    for num in columns:
+        suma += int(num[1]) 
+        return suma
+  
 
 def pregunta_02():
     """
@@ -50,10 +58,11 @@ def pregunta_02():
     for letra in column1:
         if letra in result.keys():
             result [letra]=result[letra]+1
-            else:
-                result[letra]=1
+        else:
+            result[letra]=1
     tuplas=[(key,value) for key,value in result.items()]
     tuplas=sorted(tuplas,key=itemgetter(0))
+    
     return tuplas
     
 
@@ -135,7 +144,19 @@ def pregunta_05():
     ]
 
     """
-    return
+    import csv
+    from operator import itemgetter
+    with open("data.csv",newline='') as file:
+        data=csv.reader(file, delimiter='\t')
+        columns= list(data)
+        column1=[row[0:3] for row in columns]
+  
+    def valores(letra,column1):
+        column2=[int(x[1]) for x in column1 if letra==x[0]
+        return column2
+    
+    letras=sorted(set([x[0] for x in column1]))
+    return [((x,max(valores(x,column1)),min(valores(x,column1)))) for x in letras]
 
 
 def pregunta_06():
