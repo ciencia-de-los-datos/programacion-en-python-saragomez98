@@ -256,7 +256,6 @@ def pregunta_07():
     """
     import csv
     from operator import itemgetter
-
     with open("data.csv",newline='') as file:
         data=csv.reader(file, delimiter='\t')
         columns= list(data)
@@ -265,8 +264,8 @@ def pregunta_07():
     for x in columns:
         key=x[0]
         value=x[1]
-    tupla=(str(key),int(value))
-    result.append(tupla)
+        tupla=(str(key),int(value))
+        result.append(tupla)
     
     result2={}
     for letra,valor in result:
@@ -363,9 +362,9 @@ def pregunta_09():
     for x in listas:
         for i in x:
             key=i[0:3]
-        value=i[4:6]
-        tupla=(str(key),int(value))
-        result.append(tupla)
+            value=i[4:6]
+            tupla=(str(key),int(value))
+            result.append(tupla)
  
     result2={}
     for letra,valor in result:
