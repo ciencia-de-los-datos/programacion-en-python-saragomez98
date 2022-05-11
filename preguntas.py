@@ -220,8 +220,33 @@ def pregunta_07():
     ]
 
     """
-    return
+    import csv
+    from operator import itemgetter
 
+    with open("data.csv",newline='') as file:
+        data=csv.reader(file, delimiter='\t')
+        columns= list(data)
+
+    result=[]
+    for x in columns:
+        key=x[0]
+        value=x[1]
+    tupla=(str(key),int(value))
+    result.append(tupla)
+    
+    result2={}
+    for letra,valor in result:
+        valor=int(valor)
+        if valor in result2.keys():
+            result2[valor].append(letra)
+        else:
+            result2[valor]=[letra]
+ 
+    result07=[(int(key),value) for key, value in result2.items()]
+    result07=sorted(result07,key=itemgetter(0))
+
+    return result07
+    
 
 def pregunta_08():
     """
@@ -245,7 +270,31 @@ def pregunta_08():
     ]
 
     """
-    return
+    import csv
+    from operator import itemgetter
+    with open("data.csv",newline='') as file:
+        data=csv.reader(file, delimiter='\t')
+        columns= list(data)
+
+    result=[]
+    for x in columns:
+        key=x[0]
+        value=x[1]
+        tupla=(str(key),int(value))
+        result.append(tupla)
+   
+    result2={}
+    for letra,valor in result:
+        valor=int(valor)
+        if valor in result2.keys():
+            result2[valor].append(letra)
+        else:
+            result2[valor]=[letra]
+  
+    result08=[(int(key),sorted(list(set(value)))) for key, value in result2.items()]
+    result08=sorted(result08,key=itemgetter(0))
+  
+    return result08
 
 
 def pregunta_09():
