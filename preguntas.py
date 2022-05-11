@@ -178,7 +178,20 @@ def pregunta_05():
     ]
 
     """
-    return
+    import csv
+    from operator import itemgetter
+    with open("data.csv",newline='') as file:
+        data=csv.reader(file, delimiter='\t')
+        columns= list(data)
+        column1=[row[0:3] for row in columns]
+
+    def valores(letra,column1):
+        column2=[int(x[1]) for x in column1 if letra==x[0]]
+        return column2
+
+    letras=sorted(set([x[0] for x in column1]))
+
+    return [((x,max(valores(x,column1)),min(valores(x,column1)))) for x in letras]
 
 def pregunta_06():
     """
