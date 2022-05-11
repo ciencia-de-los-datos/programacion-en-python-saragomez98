@@ -188,7 +188,7 @@ def pregunta_05():
     column2=[int(x[1]) for x in column1 if letra==x[0]]
     
     result05=[((x,max(valores(x,column1)),min(valores(x,column1)))) for x in letras]
-    return resull05
+    return result05
 
 def pregunta_06():
     """
