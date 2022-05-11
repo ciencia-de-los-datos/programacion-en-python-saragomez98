@@ -29,7 +29,7 @@ def pregunta_01():
     suma=0
     for num in columns:
         suma += int(num[1]) 
-        return suma
+    return suma
   
 
 def pregunta_02():
@@ -144,21 +144,6 @@ def pregunta_05():
     ]
 
     """
-    import csv
-    from operator import itemgetter
-    with open("data.csv",newline='') as file:
-        data=csv.reader(file, delimiter='\t')
-        columns= list(data)
-        column1=[row[0:3] for row in columns]
-  
-    def valores(letra,column1):
-        column2=[int(x[1]) for x in column1 if letra==x[0]
-        return column2
-    
-    def pregunta():
-        letras=sorted(set([x[0] for x in column1]))
-        return [((x,max(valores(x,column1)),min(valores(x,column1)))) for x in letras]
-      
     return
 
 def pregunta_06():
@@ -183,7 +168,35 @@ def pregunta_06():
     ]
 
     """
-    return
+    import csv
+    from operator import itemgetter
+
+    with open("data.csv",newline='') as file:
+        data=csv.reader(file, delimiter='\t')
+        columns= list(data)
+   
+    listas=[row[4].split(",") for row in columns]
+
+    result=[]
+    for x in listas:
+        for i in x:
+            key=i[0:3]
+            value=i[4:6]
+            tupla=(str(key),int(value))
+            result.append(tupla)
+    result2={}
+    for letra,valor in result:
+        valor=int(valor)
+        if letra in result2.keys():
+            result2[letra].append(valor)
+        else:
+            result2[letra]=[valor]
+
+    result06=[(key,min(value),max(value)) for key,value in result2.items()]
+    result06=sorted(result06,key=itemgetter(0))
+
+  
+    return result06
 
 
 def pregunta_07():
