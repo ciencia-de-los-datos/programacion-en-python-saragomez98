@@ -184,14 +184,13 @@ def pregunta_05():
         data=csv.reader(file, delimiter='\t')
         columns= list(data)
         column1=[row[0:3] for row in columns]
-
+    letras=sorted(set([x[0] for x in column1]))
     def valores(letra,column1):
         column2=[int(x[1]) for x in column1 if letra==x[0]]
         return column2
 
-    letras=sorted(set([x[0] for x in column1]))
-
-    return [((x,max(valores(x,column1)),min(valores(x,column1)))) for x in letras]
+    result05=[((x,max(valores(x,column1)),min(valores(x,column1)))) for x in letras]
+    return resull05
 
 def pregunta_06():
     """
