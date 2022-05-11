@@ -21,8 +21,17 @@ def pregunta_01():
     214
 
     """
-    return
+    import csv
+    from operator import itemgetter
 
+    with open("data.csv",newline='') as file:
+        data=csv.reader(file, delimiter='\t')
+        columns= list(data)
+    suma=0
+    for num in columns:
+        suma += int(num[1]) 
+    return suma
+  
 
 def pregunta_02():
     """
