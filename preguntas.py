@@ -82,7 +82,41 @@ def pregunta_03():
     ]
 
     """
-    return
+    import csv
+    from multiprocessing import cpu_count
+    from operator import itemgetter
+    with open("data.csv",newline='') as file:
+        data=csv.reader(file, delimiter='\t')
+        columns= list(data)
+        column1=[row[0]for row in columns]
+        column2=[row[1] for row in columns]
+        lista=list(zip(column1,column2))
+    
+    count_list = []
+    letter_list=['A','B','C','D','E']
+    a_count = 0
+    b_count = 0
+    c_count = 0
+    d_count = 0
+    e_count = 0
+    #count_list = []
+
+    for i in range(len(lista)):
+        if lista[i][0]  =='A':
+            a_count += int(lista[i][1])
+        elif lista[i][0] == 'B':
+            b_count += int(lista[i][1])
+        elif lista[i][0] == 'C':
+            c_count += int(lista[i][1])
+        elif lista[i][0] == 'D':
+            d_count += int(lista[i][1])
+        elif lista[i][0] == 'E':
+            e_count += int(lista[i][1])
+    
+    count_list =[a_count,b_count,c_count,d_count,e_count]
+    lista_final=list(zip(letter_list,count_list))
+    print(lista_final)
+    return lista_final
 
 
 def pregunta_04():
@@ -317,9 +351,36 @@ def pregunta_09():
     }
 
     """
-    return
+    import csv
+    from operator import itemgetter
+    with open("data.csv",newline='') as file:
+        data=csv.reader(file, delimiter='\t')
+        columns= list(data)
+  
+    listas=[row[4].split(",") for row in columns]
+   
+    result=[]
+    for x in listas:
+        for i in x:
+            key=i[0:3]
+        value=i[4:6]
+        tupla=(str(key),int(value))
+        result.append(tupla)
+ 
+    result2={}
+    for letra,valor in result:
+        valor=int(valor)
+        if letra in result2.keys():
+            result2[letra].append(valor)
+        else:
+            result2[letra]=[valor]
+ 
+    result09=[(key,len(value)) for key,value in result2.items()]
+    result09=sorted(result09,key=itemgetter(0))
+    result09=dict(result09)
 
-
+    return result09
+  
 def pregunta_10():
     """
     Retorne una lista de tuplas contengan por cada tupla, la letra de la columna 1 y la
@@ -338,8 +399,21 @@ def pregunta_10():
 
 
     """
-    return
+    import csv
+    from operator import itemgetter
+    with open("data.csv",newline='') as file:
+        data=csv.reader(file, delimiter='\t')
+        columns= list(data)
 
+    result=[]
+    for x in columns:
+        letra=x[0]
+        value1=x[3].split(',')
+        value2=x[4].split(',')
+        tupla=(letra,len(value1),len(value2))
+        result.append(tupla)
+
+    return result
 
 def pregunta_11():
     """
@@ -359,9 +433,25 @@ def pregunta_11():
 
 
     """
-    return
+    import csv
+    from operator import itemgetter
+    with open("data.csv",newline='') as file:
+        data=csv.reader(file, delimiter='\t')
+        columns= list(data)
+        lista= sorted([x[3] for x in columns])
+        lista=[x.split(',') for x in lista]
+        lista=sorted(set([x[y] for x in lista for y in range(len(x))]))
 
-
+    result={}
+    for x in lista:
+        for y in columns:
+            if x in y[3] and x not in result.keys():
+                result[x]=int(y[1])
+            elif x in y[3]:
+                result[x]+=int(y[1])
+    
+    return result
+    
 def pregunta_12():
     """
     Genere un diccionario que contengan como clave la columna 1 y como valor la suma de
@@ -377,4 +467,20 @@ def pregunta_12():
     }
 
     """
-    return
+    import csv
+    from operator import itemgetter
+    with open("data.csv",newline='') as file:
+        data=csv.reader(file, delimiter='\t')
+        columns= list(data)
+        column1=sorted(set([row[0] for row in columns]))
+  
+    result12={}
+    for letra in column1:
+        for num in columns:
+            if letra==num[0] and letra not in result12.keys():
+                result12 [letra]=sum([int(i[4:]) for i in num[4].split(',')])
+            elif letra==num[0]:
+                result12[letra]+=sum([int(i[4:]) for i in num[4].split(',')])
+  
+
+    return result12
