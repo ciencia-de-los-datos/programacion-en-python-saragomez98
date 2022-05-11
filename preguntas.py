@@ -39,7 +39,23 @@ def pregunta_02():
     ]
 
     """
-    return
+    import csv
+    from operator import itemgetter
+
+    with open("data.csv",newline='') as file:
+        data=csv.reader(file, delimiter='\t')
+        columns= list(data)
+        column1=[row[0]for row in columns]
+    result=dict()
+    for letra in column1:
+        if letra in result.keys():
+            result [letra]=result[letra]+1
+            else:
+                result[letra]=1
+    tuplas=[(key,value) for key,value in result.items()]
+    tuplas=sorted(tuplas,key=itemgetter(0))
+    return tuplas
+    
 
 
 def pregunta_03():
@@ -82,7 +98,26 @@ def pregunta_04():
     ]
 
     """
-    return
+    import csv
+    from operator import itemgetter
+    with open("data.csv",newline='') as file:
+        data=csv.reader(file, delimiter='\t')
+        columns= list(data)
+        column1=[row[2]for row in columns]
+
+    fecha= [z.split("-") for z in column1]
+    mes=[row[1] for row in fecha]
+ 
+    result=dict()
+    for dato in mes:
+        if dato in result.keys():
+            result [dato]=result[dato]+1
+        else:
+            result[dato]=1
+    
+    tuplas=[(key,value) for key,value in result.items()]
+    tuplas=sorted(tuplas,key=itemgetter(0))
+    return tuplas
 
 
 def pregunta_05():
